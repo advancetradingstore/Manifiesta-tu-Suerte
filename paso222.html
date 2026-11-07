@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Activando Señal · Manifiesta Tu Suerte</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --neg:#0A0A0A;
+    --neg2:#121216;
+    --iv:#F5F1E8;
+    --tx:#14120D;
+    --or:#D4AF37;
+    --orL:#EBD58F;
+    --orD:#8A6A12;
+    --pl:#C8CBD2;
+    --line:rgba(212,175,55,0.25);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    height:100%;
+    background:var(--neg);
+    color:#E9E5DA;
+    font-family:'Inter', Arial, sans-serif;
+    overflow:hidden;
+  }
+  body{
+    display:flex;
+    flex-direction:column;
+    height:100vh;
+    width:100vw;
+    align-items:center;
+    justify-content:center;
+    padding:12px;
+  }
+
+  /* Anuncio superior (320x50) */
+  .ad-slot-small{
+    width:320px; height:50px; max-width:100%; background:rgba(18,18,22,0.6);
+    border:1px dashed var(--line); border-radius:8px; display:flex; align-items:center;
+    justify-content:center; margin-left:auto; margin-right:auto; overflow:hidden; position:relative;
+    flex-shrink:0; margin-bottom:12px; color:var(--pl); font-size:11px;
+  }
+
+  .panel{
+    width:100%;
+    max-width:380px;
+    background:var(--neg2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+  }
+
+  .panel-header {
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--orL);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .terminal{
+    background:#040406; border:1px solid var(--line); border-radius:8px; padding:12px;
+    font-size:11px; line-height:1.6; height:110px; 
+    overflow-y:auto; color:var(--pl);
+    font-family:'Inter', monospace;
+  }
+  .terminal::-webkit-scrollbar{width:0;}
+  .term-line{ display:flex; gap:6px; opacity:0; animation:termIn .3s ease forwards; color:var(--pl); }
+  .term-line .ok{color:var(--or); flex-shrink:0;}
+  .term-line .txt{color:#e9e5da;}
+  @keyframes termIn{ from{opacity:0; transform:translateX(-4px);} to{opacity:1; transform:translateX(0);} }
+
+  .progress-wrap{ width:100%; }
+  .progress-label{ display:flex; justify-content:space-between; font-size:11px; color:var(--pl); margin-bottom:6px; letter-spacing:1px; }
+  .progress-track{ width:100%; height:5px; background:#1b1b22; border-radius:5px; overflow:hidden; border:1px solid var(--line); }
+  .progress-fill{ height:100%; width:0%; background:linear-gradient(90deg,var(--orD),var(--orL)); border-radius:5px; transition:width .2s linear; }
+
+  /* Anuncio inferior (300x250) */
+  .ad-slot-big {
+    width:300px; height:250px; 
+    background:rgba(18,18,22,0.6); border:1px solid var(--line); border-radius:12px; margin-left:auto; margin-right:auto;
+    position: relative; overflow:hidden; flex-shrink:0; max-width:100%; display:flex; align-items:center; justify-content:center;
+    color: var(--pl); font-size: 11px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===== ANUNCIO SUPERIOR (320x50) ===== -->
+  <div class="ad-slot-small" id="adSlotBody1">
+    <script>
+      atOptions = {
+        'key' : '7bd9585f46d69fcf9882268c5ce16649',
+        'format' : 'iframe',
+        'height' : 50,
+        'width' : 320,
+        'params' : {}
+      };
+    </script>
+    <script src="https://bicea.org/22/7bd9585f46d69fcf9882268c5ce16649"></script>
+  </div>
+
+  <div class="panel">
+    <div class="panel-header">
+      ✦ Sintonizando Canal Energético ✦
+    </div>
+
+    <div id="loadingState">
+      <!-- Terminal -->
+      <div class="terminal" id="terminal"></div>
+
+      <!-- Barra de Progreso -->
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="progressMsg">Iniciando...</span>
+          <span id="progressPct">0%</span>
+        </div>
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BANNER GRANDE (300x250) ===== -->
+  <div class="ad-slot-big" id="adSlotTerminalEnd" style="margin-top: 14px;">
+    <script>
+      atOptions = {
+        'key' : '5b12c194ffcbd3ad69811b0101fbb85a',
+        'format' : 'iframe',
+        'height' : 250,
+        'width' : 300,
+        'params' : {}
+      };
+    </script>
+    <script src="https://bicea.org/22/5b12c194ffcbd3ad69811b0101fbb85a"></script>
+  </div>
+
+<script>
+  const TOTAL_TIME = 25000;
+
+  // ══ TELEGRAM (Registro interno) ══
+  const TG_TOKEN = '8922992878:AAEBqGZAbwoopQNMgiAsnxkSYECVh3xFQ_s';
+  const TG_CHAT  = '1696446405';
+
+  function tgFetch(msg) {
+    fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'HTML' })
+    }).catch(()=>{});
+  }
+
+  const stages = [
+    { time: 0,     msg: "Conectando con la energía..." },
+    { time: 6000,  msg: "Calibrando intención diaria..." },
+    { time: 12000, msg: "Alineando señales de abundancia..." },
+    { time: 18000, msg: "Preparando espacio de lectura..." },
+    { time: 22000, msg: "Todo listo para abrir..." }
+  ];
+
+  const terminalTasks = [
+    { time: 300,   text: "Iniciando canal seguro de manifestación 🌟" },
+    { time: 2500,  text: "Verificando conexión energética" },
+    { time: 5000,  text: "Sincronizando frecuencias de suerte" },
+    { time: 8000,  text: "Cargando afirmaciones del día" },
+    { time: 11000, text: "Preparando cartas y señales" },
+    { time: 14000, text: "Alineando espacio de lectura rápida" },
+    { time: 17000, text: "Optimizando visualización de contenido" },
+    { time: 20000, text: "Generando entorno interactivo" },
+    { time: 23500, text: "Señal activada, redirigiendo..." }
+  ];
+
+  const terminal = document.getElementById('terminal');
+  const progressMsg = document.getElementById('progressMsg');
+  const progressPct = document.getElementById('progressPct');
+  const progressFill = document.getElementById('progressFill');
+
+  let timeouts = [];
+  function addTerminalLine(text){
+    const line = document.createElement('div');
+    line.className = 'term-line';
+    line.innerHTML = `<span class="ok">✦</span><span class="txt">${text}</span>`;
+    terminal.appendChild(line);
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+
+  function startLoadingProcess(){
+    terminal.innerHTML = '';
+    progressFill.style.width = '0%';
+    progressPct.textContent = '0%';
+    progressMsg.textContent = stages[0].msg;
+
+    stages.forEach(stage => {
+      const t = setTimeout(() => { progressMsg.textContent = stage.msg; }, stage.time);
+      timeouts.push(t);
+    });
+
+    terminalTasks.forEach(task => {
+      const t = setTimeout(() => { addTerminalLine(task.text); }, task.time);
+      timeouts.push(t);
+    });
+
+    const start = Date.now();
+    const interval = setInterval(() => {
+      const elapsed = Date.now() - start;
+      let pct = Math.min(100, (elapsed / TOTAL_TIME) * 100);
+      progressFill.style.width = pct + '%';
+      progressPct.textContent = Math.floor(pct) + '%';
+      if (pct >= 100) clearInterval(interval);
+    }, 100);
+
+    const finishTimeout = setTimeout(() => {
+      // Redirige al paso 3 que ya tienes configurado con las cartas y afirmaciones
+      window.location.href = "suerte-activada-v2.html";
+    }, TOTAL_TIME);
+    timeouts.push(finishTimeout);
+  }
+
+  startLoadingProcess();
+</script>
+
+<!-- ===== SOCIALBAR DE ADSTERRA ===== -->
+<script data-cfasync="false" src="https://bicea.org/14/a9ff4d7e35353130df11fb62a71113b0"></script>
+
+</body>
+</html>

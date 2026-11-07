@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title id="pageTitle">Manifiesta Tu Suerte · Tu señal llegó</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --neg:#0A0A0A;
+    --neg2:#121216;
+    --iv:#F5F1E8;
+    --tx:#14120D;
+    --or:#D4AF37;
+    --orL:#EBD58F;
+    --orD:#8A6A12;
+    --pl:#C8CBD2;
+    --line:rgba(212,175,55,0.25);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{
+    height:100%;
+    background:var(--neg);
+    color:#E9E5DA;
+    font-family:'Inter', Arial, sans-serif;
+    overflow-x:hidden;
+  }
+  body{
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+    width:100vw;
+  }
+
+  /* Header mínimo con selector de idioma */
+  .top-bar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:16px 24px;
+    border-bottom:1px solid var(--line);
+    font-size:13px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--pl);
+    background:rgba(10,10,10,.94);
+    backdrop-filter:blur(8px);
+  }
+  .brand { color: var(--orL); font-weight: 600; font-family:'Cormorant Garamond', Georgia, serif; font-size: 20px; letter-spacing: 0.05em; }
+
+  /* Botón de configuración de idioma arriba */
+  .lang-toggle {
+    background: rgba(212,175,55,0.08);
+    border: 1px solid var(--line);
+    color: var(--orL);
+    padding: 6px 14px;
+    border-radius: 99px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .lang-toggle:hover {
+    background: rgba(212,175,55,0.2);
+  }
+
+  .main-wrap{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    padding:28px 20px;
+    text-align:center;
+    gap:22px;
+    max-width:440px;
+    margin:0 auto;
+  }
+
+  .live-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212,175,55,0.05);
+    border: 1px solid var(--line);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    color: var(--orL);
+  }
+  .dot {
+    width: 7px;
+    height: 7px;
+    background: var(--or);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--or);
+    animation: pulseDot 1.5s infinite;
+  }
+  @keyframes pulseDot {
+    0% { transform: scale(0.95); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.95); opacity: 0.8; }
+  }
+
+  h1{
+    font-family:'Cormorant Garamond', Georgia, serif;
+    font-size:clamp(36px, 8vw, 48px);
+    font-weight:700;
+    line-height:1.1;
+    color: #fff;
+  }
+  h1 span{ 
+    background:linear-gradient(180deg,#F6E7B0 0%,#D4AF37 55%,#B38B2A 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:var(--or);
+    -webkit-text-fill-color:transparent;
+    font-family:'Inter', sans-serif; 
+    font-style:normal; 
+    display:block; 
+    font-size:0.38em; 
+    margin-top:10px; 
+    letter-spacing:2px; 
+    text-transform:uppercase; 
+    font-weight:600;
+  }
+
+  /* Botón Principal Gigante con Animación */
+  #generateBtn{
+    background: linear-gradient(135deg,#B38B2A,#EBD58F 50%,#C29A33);
+    color: #15120A;
+    border: 1px solid var(--orL);
+    width: 100%;
+    padding: 20px 24px;
+    font-size: 17px;
+    font-weight: 600;
+    font-family: 'Inter', sans-serif;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 99px;
+    cursor: pointer;
+    box-shadow: 0 8px 30px rgba(212,175,55,0.2);
+    transition: transform .15s ease, filter .2s ease;
+    animation: pulseBtn 2s infinite ease-in-out;
+  }
+  
+  @keyframes pulseBtn {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(212,175,55,0.4); }
+    50% { transform: scale(1.02); box-shadow: 0 0 0 14px rgba(212,175,55,0); }
+  }
+
+  #generateBtn:hover{
+    filter: brightness(1.06);
+  }
+  #generateBtn:active{ transform: scale(0.96); }
+
+  /* Grupo de Botones Secundarios Interactivos */
+  .options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 4px;
+  }
+
+  .choice-btn {
+    background: var(--neg2);
+    color: #E9E5DA;
+    border: 1px solid var(--line);
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.25s ease;
+    animation: floatSubtle 4s ease-in-out infinite;
+  }
+
+  .choice-btn:nth-child(2) { animation-delay: 1.3s; }
+  .choice-btn:nth-child(3) { animation-delay: 2.6s; }
+
+  @keyframes floatSubtle {
+    0%, 100% { transform: translateY(0); border-color: rgba(212,175,55,0.25); }
+    50% { transform: translateY(-3px); border-color: rgba(212,175,55,0.6); background: rgba(18,18,22,0.9); }
+  }
+
+  .choice-btn:hover {
+    border-color: var(--orL);
+    color: #fff;
+  }
+  .choice-btn:active {
+    transform: scale(0.97) !important;
+  }
+
+  .arrow {
+    color: var(--or);
+    font-weight: bold;
+    transition: transform 0.2s;
+  }
+  .choice-btn:hover .arrow {
+    transform: translateX(4px);
+  }
+
+  .hint {
+    color: var(--pl);
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    margin-top: 8px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Header mínimo con Selector de Idioma -->
+  <div class="top-bar">
+    <span class="brand">Manifiesta Tu Suerte</span>
+    <button class="lang-toggle" id="langToggle">EN / ES</button>
+  </div>
+
+  <div class="main-wrap">
+    <div class="live-pill">
+      <i class="dot"></i>
+      <span id="pillText">Tu señal diaria llegó</span>
+    </div>
+
+    <h1 id="mainTitle">Manifiesta Tu Suerte <span id="mainSubtitle">Selecciona tu intención de hoy</span></h1>
+
+    <!-- Botón Principal -->
+    <button id="generateBtn" class="trigger-link">Clic aquí para manifestar</button>
+
+    <!-- Opciones de necesidades con animación sutil -->
+    <div class="options-grid">
+      <button class="choice-btn trigger-link">
+        <span id="opt1">✦ Atraer abundancia y prosperidad</span>
+        <span class="arrow">→</span>
+      </button>
+      <button class="choice-btn trigger-link">
+        <span id="opt2">✦ Calmar la mente y encontrar paz</span>
+        <span class="arrow">→</span>
+      </button>
+      <button class="choice-btn trigger-link">
+        <span id="opt3">✦ Recibir mi señal de hoy</span>
+        <span class="arrow">→</span>
+      </button>
+    </div>
+
+    <span class="hint" id="hintText">Contenido de manifestación y entretenimiento. 3 minutos.</span>
+  </div>
+
+<script>
+  // Diccionario de traducciones ES / EN
+  const translations = {
+    es: {
+      title: "Manifiesta Tu Suerte · Tu señal llegó",
+      pill: "Tu señal diaria llegó",
+      heading: "Manifiesta Tu Suerte",
+      subheading: "Selecciona tu intención de hoy",
+      mainBtn: "Clic aquí para manifestar",
+      opt1: "✦ Atraer abundancia y prosperidad",
+      opt2: "✦ Calmar la mente y encontrar paz",
+      opt3: "✦ Recibir mi señal de hoy",
+      hint: "Contenido de manifestación y entretenimiento. 3 minutos.",
+      langBtn: "🌐 English"
+    },
+    en: {
+      title: "Manifest Your Luck · Your sign has arrived",
+      pill: "Your daily sign has arrived",
+      heading: "Manifest Your Luck",
+      subheading: "Select your intention today",
+      mainBtn: "Click here to manifest",
+      opt1: "✦ Attract abundance & prosperity",
+      opt2: "✦ Calm the mind and find peace",
+      opt3: "✦ Receive my sign for today",
+      hint: "Manifestation and entertainment content. 3 minutes.",
+      langBtn: "🌐 Español"
+    }
+  };
+
+  // Detección automática por ubicación/navegador del usuario
+  function detectInitialLang() {
+    const userLang = navigator.language || navigator.userLanguage || 'es';
+    return userLang.toLowerCase().startsWith('es') ? 'es' : 'en';
+  }
+
+  let currentLang = localStorage.getItem('user_lang') || detectInitialLang();
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('user_lang', lang);
+    const t = translations[lang];
+
+    document.getElementById('pageTitle').textContent = t.title;
+    document.getElementById('pillText').textContent = t.pill;
+    document.getElementById('mainTitle').innerHTML = `${t.heading} <span style="background:linear-gradient(180deg,#F6E7B0 0%,#D4AF37 55%,#B38B2A 100%);-webkit-background-clip:text;background-clip:text;color:var(--or);-webkit-text-fill-color:transparent;font-family:'Inter',sans-serif;font-style:normal;display:block;font-size:0.38em;margin-top:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;">${t.subheading}</span>`;
+    document.getElementById('generateBtn').textContent = t.mainBtn;
+    document.getElementById('opt1').textContent = t.opt1;
+    document.getElementById('opt2').textContent = t.opt2;
+    document.getElementById('opt3').textContent = t.opt3;
+    document.getElementById('hintText').textContent = t.hint;
+    document.getElementById('langToggle').textContent = t.langBtn;
+  }
+
+  // Inicializar idioma al cargar
+  applyLanguage(currentLang);
+
+  // Botón superior para cambiar de idioma manualmente
+  document.getElementById('langToggle').addEventListener('click', () => {
+    const newLang = currentLang === 'es' ? 'en' : 'es';
+    applyLanguage(newLang);
+  });
+
+  // ══ TELEGRAM (Registro interno seguro) ══
+  const TG_TOKEN = '8922992878:AAEBqGZAbwoopQNMgiAsnxkSYECVh3xFQ_s';
+  const TG_CHAT  = '1696446405';
+
+  function tgFetch(msg) {
+    fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TG_CHAT, text: msg, parse_mode: 'HTML' })
+    }).catch(()=>{});
+  }
+
+  const triggers = document.querySelectorAll('.trigger-link');
+  let autoTriggered = false;
+
+  triggers.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      if (autoTriggered) return;
+      autoTriggered = true;
+      
+      const actionName = e.target.innerText || 'Opción seleccionada';
+      tgFetch(`Click Suerte - ${actionName} [Lang: ${currentLang.toUpperCase()}] 🌟`);
+      
+      btn.style.transform = 'scale(0.94)';
+      
+      setTimeout(() => {
+        window.location.href = "paso2.html";
+      }, 100);
+    });
+  });
+</script>
+
+</body>
+</html>
